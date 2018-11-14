@@ -18,7 +18,7 @@ import java.lang.IllegalArgumentException
 * */
 fun numberTest1(): Unit {
     val a: Int = 1000
-    println(a === a)
+//    println(a === a)
     val boxedA: Int? = a
     val boxedB: Int? = a
     println(boxedA === boxedB)
@@ -141,6 +141,60 @@ fun whenTest1Inner(x: Int): Int {
     return x + 1;
 }
 
+/*
+* for 循环可以对任何提供迭代器的对象进行遍历，类似 foreach
+* */
+fun forTest1(): Unit {
+
+    println("exe method forTest1")
+
+    val array = arrayOf("a","b","c")
+    for (i in array.indices){
+        println(array[i])
+    }
+    for ((index,value) in array.withIndex()){
+        println("the element at $index is $value")
+    }
+}
+
+/*
+* while 循环，while 与 do...while 照常使用
+* */
+
+/*
+* break 与 continue 标签
+* Kotlin 中任何表达式都可以用标签标记，标签格式为标识符后跟 @ 符号。示例：
+* loop@ for(i in 1..100){
+*   // ...
+* }
+*
+* break@label 跳转到位于该标签指定的循环后面的执行点
+* continue@label 跳转到标签指定循环点的下一次迭代
+* */
+
+fun labelTest1(): Unit {
+    println("exe method labelTest1")
+
+    loop@ for (i in 1..9){
+        for (j in 1..9){
+            if (j == 7) break@loop
+            println("j = $j")
+            println("i = $i")
+        }
+    }
+}
+
+fun labelTest2(): Unit {
+    println("exe method labelTest2")
+    loop@ for (x in 1..9){
+        for (y in 1..9){
+            if (y == 7) continue@loop
+            println("y = $y")
+            println("x = $x")
+        }
+    }
+}
+
 fun main(args: Array<String>){
     println("Hello world!")
     numberTest1()
@@ -164,4 +218,9 @@ fun main(args: Array<String>){
     whenTest1(3)
     whenTest1(4)
     whenTest1(5)
+
+    forTest1()
+
+    labelTest1()
+    labelTest2()
 }
